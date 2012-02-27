@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @client.name %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @client.phone %>
+</p>
+
+<h2>Assigned Agent</h2>
+<% if @client.assigned_agent %>
+  <%= link_to "#{@client.assigned_agent.name}", agent_path(@client.assigned_agent) %>
+<% else %>
+  <%= link_to 'Add a new agent', new_agent_client_path %>
+<% end %>
+
+<h2>Tasks</h2>
+<ul>
+<%= render @client.tasks %>
+</ul>
+
+<h2>Add a Task</h2>
+<%= form_for([@client, @client.tasks.build]) do |f| %>
+  <p>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit "Add a Task" %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Phonein</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  
+  <p><%= link_to "Home", root_url %></p>
+  <% if admin_signed_in? %>
+    Welcome, <%= current_admin.email %><br />
+    <%= link_to 'Sign-Out', destroy_admin_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to 'Sign-In', new_admin_session_path %> | <%= link_to 'Sign-up', new_admin_registration_path %>
+  <% end %>
+  
+<%= yield %>
+
+</body>
+</html>

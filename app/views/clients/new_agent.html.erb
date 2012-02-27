@@ -1,0 +1,5 @@
+<h1>Add an agent to <%= @client.name %></h1>
+  
+<%= form_tag({:controller => 'clients', :action => 'add_new_agent'}, :method => 'post') %>
+  <%= collection_select(:client, :client_id, @agents, :id, :name) %>
+  <%= submit_tag "Add this agent"%>

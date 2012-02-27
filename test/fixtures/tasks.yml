@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  client: 
+  tododate: 2012-02-26
+
+two:
+  name: MyString
+  client: 
+  tododate: 2012-02-26

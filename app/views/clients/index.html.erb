@@ -1,0 +1,28 @@
+<h1>Phone Check-in</h1>
+
+<%= link_to 'Agents', agents_path %> | 
+<%= link_to 'New Client', new_client_path %>
+
+<h2>Listing clients</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @clients.each do |client| %>
+  <tr>
+    <td><%= client.name %></td>
+    <td><%= client.phone %></td>
+    <td><%= link_to 'Show', client %></td>
+    <td><%= link_to 'Edit', edit_client_path(client) %></td>
+    <td><%= link_to 'Destroy', client, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

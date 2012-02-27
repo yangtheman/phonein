@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  client: 
+  agent: 
+  current: false
+
+two:
+  client: 
+  agent: 
+  current: false
