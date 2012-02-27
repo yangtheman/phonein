@@ -4,7 +4,7 @@ class TwiliosController < ApplicationController
   
   def incoming
     # Get client by phone number
-    client_phone = params['From']    
+    client_phone = "+1" << params['From']  
     @client = Client.find_by_phone(client_phone)
     
     # Welcom message.
