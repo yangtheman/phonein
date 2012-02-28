@@ -43,7 +43,7 @@ class TwiliosController < ApplicationController
       
   def direction    
     @client = Client.find(params[:client_id])
-    @agent = Agent.find(parmas[:agent_id])
+    @agent = Agent.find(params[:agent_id])
     @tasks = @client.task_list
     
     # 1 to hear the tasks again, 2 to check out.
