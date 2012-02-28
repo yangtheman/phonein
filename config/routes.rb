@@ -10,7 +10,7 @@ Phonein::Application.routes.draw do
 
   resources :agents
   
-  resources :twilios
+  resources :twilios do
     collection do
       post 'incoming'
       post 'validate'
