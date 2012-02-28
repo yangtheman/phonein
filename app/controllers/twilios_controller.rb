@@ -50,7 +50,7 @@ class TwiliosController < ApplicationController
     if params['Digits'] == '1'
       render :action => "read_tasks.xml.builder", :layout => false
       return 
-    elsif parmas['Digits'] == '2'
+    elsif params['Digits'] == '2'
       # if 2, "thank you for your service today."
       @agent.check_out(@client.id)
       render :action => 'goodbye.xml.builder', :layout => false
