@@ -6,14 +6,14 @@ class Agent < ActiveRecord::Base
   
   def initialize 
     @validated = false
-    @client_id = nil
+    @cid = nil
     super()
   end
   
   state_machine :state, :initial => :not_checked_in do
     
     after_transition :not_checked_in => :checked_in do |agent, transition|
-      agent.client_id = transition.args.first
+      agent.cid = transition.args.first
     end
     
     after_transition any => :not_checked_in do |agent, transition|
