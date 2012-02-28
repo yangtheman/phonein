@@ -10,13 +10,6 @@
   <%= @client.phone %>
 </p>
 
-<h2>Assigned Agent</h2>
-<% if @client.assigned_agent %>
-  <%= link_to "#{@client.assigned_agent.name}", agent_path(@client.assigned_agent) %>
-<% else %>
-  <%= link_to 'Add a new agent', new_agent_client_path %>
-<% end %>
-
 <h2>Tasks</h2>
 <ul>
 <%= render @client.tasks %>

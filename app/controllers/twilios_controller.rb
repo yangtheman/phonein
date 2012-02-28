@@ -12,8 +12,13 @@ class TwiliosController < ApplicationController
     # "Welcome to #{@client.name}'s residence."
     # Ask agent to identy him/herself.
     # "Please enter your code"
-    @post_to = BASE_URL + "/verfiy.xml?client_id=#{@client.id}"
-    render :action => "incoming.xml.builder", :layout => false
+    if @client.nil? 
+      render :action => "no_client.xml.builder"
+      return
+    else
+      @post_to = BASE_URL + "/verfiy.xml?client_id=#{@client.id}"
+      render :action => "incoming.xml.builder", :layout => false
+    end
   end
   
   def verify
