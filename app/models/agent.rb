@@ -11,7 +11,11 @@ class Agent < ActiveRecord::Base
   end
   
   def checked_in?(cid)
-    self.pairs.last.client_id == cid && self.pairs.last.state == "checked_in"
+    if self.pairs.last 
+      self.pairs.last.client_id == cid.to_i && self.pairs.last.state == "checked_in"
+    else
+      nil
+    end
   end
   
 end
