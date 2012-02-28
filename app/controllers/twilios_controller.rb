@@ -16,7 +16,7 @@ class TwiliosController < ApplicationController
       render :action => "no_client.xml.builder"
       return
     else
-      @post_to = BASE_URL + "/verfiy.xml?client_id=#{@client.id}"
+      @post_to = BASE_URL + "/verify?client_id=#{@client.id}"
       render :action => "incoming.xml.builder", :layout => false
     end
   end
@@ -37,7 +37,7 @@ class TwiliosController < ApplicationController
       end
     end 
 
-    @post_to = BASE_URL + "/direction.xml?agent_id=#{@agent.id}&client_id=#{@client.id}"
+    @post_to = BASE_URL + "/direction?agent_id=#{@agent.id}&client_id=#{@client.id}"
     render :action => "direction.xml.builder", :layout => false
   end
       
