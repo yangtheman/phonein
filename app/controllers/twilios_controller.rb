@@ -12,11 +12,11 @@ class TwiliosController < ApplicationController
     # "Welcome to #{@client.name}'s residence."
     # Ask agent to identy him/herself.
     # "Please enter your code"
-    @post_to = BASE_URL + "/validate.xml?client_id=#{@client.id}"
+    @post_to = BASE_URL + "/verfiy.xml?client_id=#{@client.id}"
     render :action => "incoming.xml.builder", :layout => false
   end
   
-  def validate
+  def verify
     @client = Client.find(params[:client_id])    
     @agent = Agent.find_by_code(params['Digits'])
     

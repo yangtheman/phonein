@@ -13,7 +13,7 @@ Phonein::Application.routes.draw do
   resources :twilios do
     collection do
       post 'incoming'
-      post 'validate'
+      post 'verify'
       post 'direction'
     end
   end
