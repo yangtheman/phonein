@@ -9,6 +9,14 @@ Phonein::Application.routes.draw do
   end
 
   resources :agents
+  
+  resources :twilios
+    collection do
+      post 'incoming'
+      post 'validate'
+      post 'direction'
+    end
+  end
 
   devise_for :admins
 
