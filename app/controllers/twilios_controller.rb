@@ -29,7 +29,7 @@ class TwiliosController < ApplicationController
       render :action => "incoming"
       return
     else
-      if @agent.checked_in? 
+      if @agent.checked_in?(@client.id) 
         @message = "You have already checked in."
       else
         @agent.check_in(@client.id)
@@ -52,7 +52,7 @@ class TwiliosController < ApplicationController
       return 
     elsif parmas['Digits'] == '2'
       # if 2, "thank you for your service today."
-      @agent.check_out
+      @agent.check_out(@client.id)
       render :action => 'goodbye.xml.builder', :layout => false
     end
     

@@ -2,38 +2,16 @@ class Agent < ActiveRecord::Base
   belongs_to :admin
   has_many :pairs
   
-  attr_accessor :validated, :client_id
-  
-  def initialize 
-    @validated = false
-    @cid = nil
-    super()
+  def check_in(cid)
+    self.pairs.create(:client_id => cid, :state => "checked_in")
   end
   
-  state_machine :state, :initial => :not_checked_in do
-    
-    after_transition :not_checked_in => :checked_in do |agent, transition|
-      agent.cid = transition.args.first
-    end
-    
-    after_transition any => :not_checked_in do |agent, transition|
-      agent.validated = false
-      agent.client_id = nil
-    end
-    
-    event :check_in do
-      transition :not_checked_in => :checked_in, :if => :validated
-    end
-    
-    event :check_out do
-      transition :checked_in => :not_checked_in, :if => :validated
-    end
-    
-    state :not_checked_in do
-    end
-    
-    state :checked_in do
-    end
-  end  
+  def check_out(cid)
+    self.pairs.create(:client_id => cid, :state => "not_checked_in")
+  end
+  
+  def checked_in?(cid)
+    self.pairs.last.client_id == cid && self.pairs.last.state == "checked_in"
+  end
   
 end
