@@ -13,4 +13,12 @@ class Client < ActiveRecord::Base
     end
     task_list
   end
+  
+  def agent
+    if self.pairs.last.state == "checked_in"
+      Agent.find(self.pairs.last.agent_id)
+    else
+      nil
+    end
+  end
 end
