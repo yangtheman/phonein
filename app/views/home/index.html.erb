@@ -1,24 +1,33 @@
 <div class="row">
-  <div class="hero-unit">
+  <div class="hero-unit span12">
     <h1>Phone In</h1>
-    <p>
-      Check in and out by making a phone call and following SIMPLE directions.
-    </p>
-    <p>
-      <% if admin_signed_in? %>
-        Welcome back, <%= current_admin.email %>
-      <% else %>
-        <%= link_to "Sign-up Today!", new_admin_registration_path, :class => "btn btn-primary btn-large"%>
-      <% end %>
-    </p>
-  </div>
     <% if admin_signed_in? %>
-      <div class="span6">
-        <%= link_to "Add client", clients_path, :class => "btn btn-primary btn-large" %>
+      <p>Welcome back, <%= current_admin.email %></p>
+      <div class="row">
+        <div class="span6">
+          <%= link_to "Add a Client", new_client_path, :class => "btn btn-primary btn-large"%>
+        </div>
+        <div class="span6">
+          <%= link_to "Add an Agent", new_agent_path, :class => "btn btn-primary btn-large"%>
+        </div>
       </div>
-      <div class="span6">
-        <%= link_to "Add agent", agents_path, :class => "btn btn-primary btn-large" %>
-      </div>
+    <% else %>
+      <p>Check in and out by making a phone call and following SIMPLE directions.</p>
+      <p><%= link_to "Sign-up Today!", new_admin_registration_path, :class => "btn btn-primary btn-large"%></p>
     <% end %>
-</div>
-  
+ </div>
+  <% if !admin_signed_in? %>
+    <div class="span4">
+      <h1>Step 1</h1>
+      <h3>Create a client and tasks</h3>
+    </div>
+    <div class="span4">
+      <h1>Step 2</h1>
+      <h3>Create an agent</h3>
+    </div>
+    <div class="span4">
+      <h1>Step 3</h1>
+      <h3>Have agent check in and out using Client's phone</h3>
+    </div>
+  <% end %>
+</div>  

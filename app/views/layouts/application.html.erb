@@ -21,9 +21,9 @@
             <li class="divider-vertical"></li>
             <li>
               <% if admin_signed_in? %>
-                Signed in as <%= current_admin.email %>
+                <%= link_to "Sign Out", destroy_admin_session_path, :method => "delete" %>
               <% else %>
-                <%= link_to "Sign-In", new_admin_session_path %>
+                <%= link_to "Sign In", new_admin_session_path %>
               <% end %>
             </li>
           </ul>
@@ -47,6 +47,12 @@
     <% end %>
    
     <p><%= content_for?(:content) ? yield(:content) : yield %> </p>
+
+    <hr>
+
+    <footer>
+      <p>&copy; Yang Chung 2012</p>
+    </footer>
   </div>
 </body>
 </html>
