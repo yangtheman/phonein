@@ -2,9 +2,14 @@ class Client < ActiveRecord::Base
   has_many :tasks, :dependent => :destroy
   has_many :pairs
   belongs_to :admin
-      
-  validates :phone, :uniqueness => true
   
+  before_validation do
+    self.phone = self.phone.gsub(/\D/, '')
+  end
+      
+  validates :phone, :uniqueness => true, 
+                    :length => { :is => 10, :message => "Need a correct US phone number" }
+                        
   def task_list
     tasks = self.tasks
     task_list = "There are #{tasks.size} tasks to perform today."

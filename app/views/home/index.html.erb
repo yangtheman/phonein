@@ -4,11 +4,15 @@
     <% if admin_signed_in? %>
       <p>Welcome back, <%= current_admin.email %></p>
       <div class="row">
-        <div class="span6">
-          <%= link_to "Add a Client", new_client_path, :class => "btn btn-primary btn-large"%>
+        <div class="span4">
+          <%= link_to "Manage Clients", clients_path, :class => "btn btn-primary btn-large"%>
         </div>
-        <div class="span6">
-          <%= link_to "Add an Agent", new_agent_path, :class => "btn btn-primary btn-large"%>
+        <div class="span4">
+          <%= link_to "Manage Agents", agents_path, :class => "btn btn-primary btn-large"%>
+        </div>
+        <div class="span4">
+          <%= link_to "Buy a Phone Number", "#", :class => "btn btn-primary btn-large disabled"%>
+          <p><em>Coming Soon!</em></p>
         </div>
       </div>
     <% else %>

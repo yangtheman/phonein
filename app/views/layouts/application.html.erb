@@ -45,6 +45,14 @@
         <strong><%= alert %></strong>
       </div>
     <% end %>
+    
+    <% if admin_signed_in? %>
+      <div class="row">
+        <div class="span12">
+          <p>Test Number: <strong>+1-415-599-2671</strong>, PIN: <strong>3622-9670</strong></p>
+        </div>
+      </div>
+    <% end %>
    
     <p><%= content_for?(:content) ? yield(:content) : yield %> </p>
 
