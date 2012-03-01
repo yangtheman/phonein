@@ -1,6 +1,8 @@
 xml.instruct!
 xml.Response do
-  xml.Say "Thank you for your service today."
-  xml.Say "Good-bye."
-  xml.Hangup
+  xml.Gather(:action => @post_to, :numDigits => 1) do
+    xml.Say "#{@goodbye_message}"
+    xml.Say "Good-bye."
+    xml.Hangup
+  end
 end

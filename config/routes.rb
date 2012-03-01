@@ -11,6 +11,7 @@ Phonein::Application.routes.draw do
       post 'incoming'
       post 'verify'
       post 'direction'
+      post 'after_tasks'
     end
   end
 

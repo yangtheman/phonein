@@ -42,6 +42,18 @@ class TwiliosController < ApplicationController
     @post_to = BASE_URL + "/direction?agent_id=#{@agent.id}&client_id=#{@client.id}"
     render :action => "direction.xml.builder", :layout => false
   end
+  
+  def after_tasks
+    @client = Client.find(params[:client_id])    
+    @tasks = @client.task_list
+    
+    if params['Digits'] == '1'
+      render :action => "read_tasks.xml.builder", :layout => false
+    elsif params['Digits'] == '2'
+      @goodbye_message = "Have a great day."
+      render :action => "goodbye.xml.builder", :layout => false
+    end
+  end
       
   def direction    
     @client = Client.find(params[:client_id])
@@ -50,14 +62,14 @@ class TwiliosController < ApplicationController
     
     # 1 to hear the tasks again, 2 to check out.
     if params['Digits'] == '1'
+      @post_to = BASE_URL + "/after_tasks"
       render :action => "read_tasks.xml.builder", :layout => false
-      return 
     elsif params['Digits'] == '2'
       # if 2, "thank you for your service today."
       @agent.check_out(@client.id)
+      @goodbye_message = "Thank you for your service today."
       render :action => 'goodbye.xml.builder', :layout => false
-    end
-    
+    end  
   end
     
 end
