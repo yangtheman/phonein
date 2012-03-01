@@ -7,19 +7,46 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <%= link_to "Phone In", root_url, :class => "brand" %>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><%= link_to "Home", root_url %></li>
+            <li><%= link_to "Clients", clients_path %></li>
+            <li><%= link_to "Agents", agents_path %></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li class="divider-vertical"></li>
+            <li>
+              <% if admin_signed_in? %>
+                Signed in as <%= current_admin.email %>
+              <% else %>
+                <%= link_to "Sign-In", new_admin_session_path %>
+              <% end %>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
   
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  
-  <p><%= link_to "Home", root_url %></p>
-  <% if admin_signed_in? %>
-    Welcome, <%= current_admin.email %><br />
-    <%= link_to 'Sign-Out', destroy_admin_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to 'Sign-In', new_admin_session_path %> | <%= link_to 'Sign-up', new_admin_registration_path %>
-  <% end %>
-  
-<%= yield %>
-
+  <div class="container">
+    <% if notice %>
+      <div class="alert alert-info">
+        <a class="close" data-dismiss="alert">×</a>
+        <strong><%= notice %></strong>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">×</a>
+        <strong><%= alert %></strong>
+      </div>
+    <% end %>
+   
+    <p><%= content_for?(:content) ? yield(:content) : yield %> </p>
+  </div>
 </body>
 </html>

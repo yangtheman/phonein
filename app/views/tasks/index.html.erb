@@ -1,27 +1,26 @@
-<h1>Listing tasks</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Client</th>
-    <th>Tododate</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.name %></td>
-    <td><%= task.client %></td>
-    <td><%= task.tododate %></td>
-    <td><%= link_to 'Show', task %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<h1>Tasks</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.name %></td>
+        <td><%= task.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_client_task_path(@client, task), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', client_task_path(@client, task), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'New', new_client_task_path, :class => 'btn btn-primary' %>

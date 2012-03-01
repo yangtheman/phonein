@@ -3,6 +3,8 @@ class Client < ActiveRecord::Base
   has_many :pairs
   belongs_to :admin
       
+  validates :phone, :uniqueness => true
+  
   def task_list
     tasks = self.tasks
     task_list = "There are #{tasks.size} tasks to perform today."

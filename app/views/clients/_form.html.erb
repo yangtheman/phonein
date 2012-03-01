@@ -1,25 +1,25 @@
-<%= form_for(@client) do |f| %>
-  <% if @client.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+<%= form_for @client, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.error_messages %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Client</legend>
 
-      <ul>
-      <% @client.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label :phone, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :phone, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', clients_path, :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>

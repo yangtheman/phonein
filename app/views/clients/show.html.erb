@@ -1,16 +1,16 @@
-<p id="notice"><%= notice %></p>
+<h1>Client</h1>
 
 <p>
-  <b>Name:</b>
+  <b>Name</b><br>
   <%= @client.name %>
 </p>
 
 <p>
-  <b>Phone:</b>
+  <b>Phone</b><br>
   <%= @client.phone %>
 </p>
 
-<h2>Agents</h2>
+<h3>Checked-in Agent</h3>
 <p>
   <% if @client.agent.nil? %>
     No agent has checked in.
@@ -18,20 +18,15 @@
     <%= link_to @client.agent.name, agent_path(@client.agent) %>
   <% end %>
 </p>
-<h2>Tasks</h2>
+
+<h3>Tasks</h3>
 <ul>
 <%= render @client.tasks %>
 </ul>
+<%= link_to "Add or Edit a task", client_tasks_path(@client), :class => 'btn btn-info' %>
 
-<h2>Add a Task</h2>
-<%= form_for([@client, @client.tasks.build]) do |f| %>
-  <p>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit "Add a Task" %>
-  </p>
-<% end %>
-
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+<div class="form-actions">
+  <%= link_to 'Back', clients_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_client_path(@client), :class => 'btn' %>
+  <%= link_to 'Delete', client_path(@client), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

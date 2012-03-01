@@ -1,28 +1,26 @@
-<h1>Phone Check-in</h1>
-
-<%= link_to 'Agents', agents_path %> | 
-<%= link_to 'New Client', new_client_path %>
-
-<h2>Listing clients</h2>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Phone</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @clients.each do |client| %>
-  <tr>
-    <td><%= client.name %></td>
-    <td><%= client.phone %></td>
-    <td><%= link_to 'Show', client %></td>
-    <td><%= link_to 'Edit', edit_client_path(client) %></td>
-    <td><%= link_to 'Destroy', client, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<h1>Clients</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.id %></td>
+        <td><%= link_to client.name, client_path(client) %></td>
+        <td><%= client.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_client_path(client), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', client_path(client), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
+<%= link_to 'New', new_client_path, :class => 'btn btn-primary' %>

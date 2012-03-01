@@ -1,85 +1,46 @@
-class AgentsController < ApplicationController
-  before_filter :authenticate_admin! 
-  
-  # GET /agents
-  # GET /agents.json
+class AgentsController < ApplicationController  
   def index
-    @agents = Agent.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @agents }
-    end
+    @agents = current_admin.agents.all
   end
 
-  # GET /agents/1
-  # GET /agents/1.json
   def show
-    @agent = Agent.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @agent }
-    end
+    @agent = current_admin.agents.find(params[:id])
   end
 
-  # GET /agents/new
-  # GET /agents/new.json
   def new
-    @agent = Agent.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @agent }
-    end
+    @agent = current_admin.agents.new
   end
 
-  # GET /agents/1/edit
   def edit
-    @agent = Agent.find(params[:id])
+    @agent = current_admin.agents.find(params[:id])
   end
 
-  # POST /agents
-  # POST /agents.json
-  def create
-    @agent = Agent.new(params[:agent])
+  def create    
+    @agent = current_admin.agents.new(params[:agent])
 
-    respond_to do |format|
-      if @agent.save
-        format.html { redirect_to @agent, notice: 'Agent was successfully created.' }
-        format.json { render json: @agent, status: :created, location: @agent }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @agent.errors, status: :unprocessable_entity }
-      end
+    if @agent.save
+      redirect_to @agent, :notice => 'Agent was successfully created.'
+    else
+      render :action => "new", :alert => 'Failed to create an agent.'
     end
   end
 
-  # PUT /agents/1
-  # PUT /agents/1.json
   def update
-    @agent = Agent.find(params[:id])
+    @agent = current_admin.agents.find(params[:id])
 
-    respond_to do |format|
-      if @agent.update_attributes(params[:agent])
-        format.html { redirect_to @agent, notice: 'Agent was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @agent.errors, status: :unprocessable_entity }
-      end
+    if @agent.update_attributes(params[:agent])
+      redirect_to @agent, :notice => 'Agent was successfully updated.'
+    else
+      render :action => "edit", :alert => 'Failed to update the agent.'
     end
   end
 
   # DELETE /agents/1
   # DELETE /agents/1.json
   def destroy
-    @agent = Agent.find(params[:id])
+    @agent = current_admin.agents.find(params[:id])
     @agent.destroy
 
-    respond_to do |format|
-      format.html { redirect_to agents_url }
-      format.json { head :ok }
-    end
+    redirect_to agents_path
   end
 end

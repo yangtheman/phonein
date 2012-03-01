@@ -1,15 +1,17 @@
-<p id="notice"><%= notice %></p>
+<h1>Agent</h1>
 
 <p>
-  <b>Name:</b>
+  <b>Name</b><br>
   <%= @agent.name %>
 </p>
 
 <p>
-  <b>Code:</b>
+  <b>Code</b><br>
   <%= @agent.code %>
 </p>
 
-
-<%= link_to 'Edit', edit_agent_path(@agent) %> |
-<%= link_to 'Back', agents_path %>
+<div class="form-actions">
+  <%= link_to 'Back', agents_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_agent_path(@agent), :class => 'btn' %>
+  <%= link_to 'Delete', agent_path(@agent), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

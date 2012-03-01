@@ -1,25 +1,25 @@
-<%= form_for(@agent) do |f| %>
-  <% if @agent.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@agent.errors.count, "error") %> prohibited this agent from being saved:</h2>
+<%= form_for @agent, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.error_messages %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Agent</legend>
 
-      <ul>
-      <% @agent.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label :code, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :code, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary btn-large' %>
+      <%= link_to 'Cancel', agents_path, :class => 'btn btn-large' %>
+    </div>
+  </fieldset>
 <% end %>

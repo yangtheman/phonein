@@ -1,95 +1,46 @@
 class ClientsController < ApplicationController
-  before_filter :authenticate_admin!
-    
-  # GET /clients
-  # GET /clients.json
+ 
   def index
-    @clients = Client.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @clients }
-    end
+    @clients = current_admin.clients.all
   end
 
-  # GET /clients/1
-  # GET /clients/1.json
   def show
-    @client = Client.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @client }
-    end
+    @client = current_admin.clients.find(params[:id])
   end
 
-  # GET /clients/new
-  # GET /clients/new.json
   def new
-    @client = Client.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @client }
-    end
+    @client = current_admin.clients.new
   end
 
-  # GET /clients/1/edit
   def edit
-    @client = Client.find(params[:id])
+    @client = current_admin.clients.find(params[:id])
   end
 
-  # POST /clients
-  # POST /clients.json
   def create
-    @client = Client.new(params[:client])
+    @client = current_admin.clients.new(params[:client])
 
-    respond_to do |format|
-      if @client.save
-        format.html { redirect_to @client, notice: 'Client was successfully created.' }
-        format.json { render json: @client, status: :created, location: @client }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    if @client.save
+      redirect_to @client, :notice => 'Client was successfully created.'
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /clients/1
-  # PUT /clients/1.json
   def update
-    @client = Client.find(params[:id])
+    @client = current_admin.clients.find(params[:id])
 
-    respond_to do |format|
-      if @client.update_attributes(params[:client])
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    if @client.update_attributes(params[:client])
+      redirect_to @client, :notice => 'Client was successfully updated.'
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /clients/1
-  # DELETE /clients/1.json
   def destroy
-    @client = Client.find(params[:id])
+    @client = current_admin.clients.find(params[:id])
     @client.destroy
 
-    respond_to do |format|
-      format.html { redirect_to clients_url }
-      format.json { head :ok }
-    end
+    redirect_to clients_url
   end
-  
-  def new_agent
-    @client = Client.find(params[:id])
-    @agents = current_admin.agents.all
-  end
-  
-  def add_new_agent
-    @client = Client.find(params[:client_id])
-    @client.pairs.new()
-  end
+
 end

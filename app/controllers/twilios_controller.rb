@@ -1,5 +1,7 @@
 class TwiliosController < ApplicationController
   
+  skip_before_filter :authenticate_admin! 
+  
   BASE_URL = "http://phonein.herokuapp.com/twilios"
   
   def incoming

@@ -9,6 +9,9 @@ gem 'pg'
 gem 'devise'
 gem 'state_machine'
 gem 'twilio-ruby'
+gem 'dynamic_form'
+gem "less-rails-bootstrap"
+#gem "less-rails-bootstrap-devise", :git => 'git://github.com/bigbento/less-rails-bootstrap-devise.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,6 +19,7 @@ group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'

@@ -1,25 +1,26 @@
-<h1>Listing agents</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Code</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @agents.each do |agent| %>
-  <tr>
-    <td><%= agent.name %></td>
-    <td><%= agent.code %></td>
-    <td><%= link_to 'Show', agent %></td>
-    <td><%= link_to 'Edit', edit_agent_path(agent) %></td>
-    <td><%= link_to 'Destroy', agent, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<h1>Agents</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @agents.each do |agent| %>
+      <tr>
+        <td><%= agent.id %></td>
+        <td><%= link_to agent.name, agent_path(agent) %></td>
+        <td><%= agent.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_agent_path(agent), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', agent_path(agent), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Agent', new_agent_path %>
+<%= link_to 'New', new_agent_path, :class => 'btn btn-primary' %>

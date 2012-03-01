@@ -2,6 +2,8 @@ class Agent < ActiveRecord::Base
   belongs_to :admin
   has_many :pairs
   
+  validates :code, :uniqueness => true
+  
   def check_in(cid)
     self.pairs.create(:client_id => cid, :state => "checked_in")
   end
