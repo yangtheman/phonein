@@ -62,7 +62,7 @@ class TwiliosController < ApplicationController
     
     # 1 to hear the tasks again, 2 to check out.
     if params['Digits'] == '1'
-      @post_to = BASE_URL + "/after_tasks"
+      @post_to = BASE_URL + "/after_tasks?client_id=#{@client.id}"
       render :action => "read_tasks.xml.builder", :layout => false
     elsif params['Digits'] == '2'
       # if 2, "thank you for your service today."
