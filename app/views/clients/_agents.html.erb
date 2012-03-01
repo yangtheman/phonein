@@ -1,0 +1,17 @@
+<tr>
+  <td><%= link_to pair.agent.name, agent_path(pair.agent) %></td>
+  <td>
+    <% if pair.state == "checked_in" %>
+      <%= pair.created_at.localtime %>
+    <% else %>
+      N/A
+    <% end %>
+  </td>
+  <td>
+    <% if pair.state == "not_checked_in" %>
+      <%= pair.created_at.localtime %>
+    <% else %>
+      N/A
+    <% end %>
+  </td>
+</tr>

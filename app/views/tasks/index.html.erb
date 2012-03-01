@@ -1,4 +1,4 @@
-<h1>Tasks</h1>
+<h1>Tasks for <%= @client.name %></h1>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -24,3 +24,4 @@
 </table>
 
 <%= link_to 'New', new_client_task_path, :class => 'btn btn-primary' %>
+<%= link_to 'Back to Client', client_path(@client), :class => 'btn' %>

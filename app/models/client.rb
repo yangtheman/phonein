@@ -23,4 +23,8 @@ class Client < ActiveRecord::Base
       nil
     end
   end
+  
+  def agents
+    self.pairs.order("created_at DESC")
+  end
 end

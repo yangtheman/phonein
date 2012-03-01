@@ -1,32 +1,52 @@
 <h1>Client</h1>
 
-<p>
-  <b>Name</b><br>
-  <%= @client.name %>
-</p>
+<div class="row">
+  <div class="span6">
+    <p>
+      <b>Name</b><br>
+      <%= @client.name %>
+    </p>
 
-<p>
-  <b>Phone</b><br>
-  <%= @client.phone %>
-</p>
+    <p>
+      <b>Phone</b><br>
+      <%= @client.phone %>
+    </p>
+    
+  </div>
 
-<h3>Checked-in Agent</h3>
+  <div class="span6">
+    <h3>Tasks</h3>
+    <ul>
+      <%= render @client.tasks %>
+    </ul>
+    <%= link_to "Add or Edit a task", client_tasks_path(@client) %>
+  </div>
+  
+  <div class="span12">
+    <div class="form-actions">
+      <%= link_to 'Back', clients_path, :class => 'btn'  %>
+      <%= link_to 'Edit', edit_client_path(@client), :class => 'btn' %>
+      <%= link_to 'Delete', client_path(@client), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
+
+<h3>Agent history</h3>
 <p>
-  <% if @client.agent.nil? %>
-    No agent has checked in.
+  <% if @client.agents.size > 0 %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Agent Name</th>
+          <th>Checked-In Time</th>
+          <th>Checked-Out Time</th>
+        </tr>
+      </thead>
+      <tbody>
+          <%= render :partial => 'agents', :collection => @client.agents, :as => :pair %>
+      </tbody>
+    </table>  
   <% else %>
-    <%= link_to @client.agent.name, agent_path(@client.agent) %>
+    There is no history of an agent having checked in for this client.
   <% end %>
 </p>
-
-<h3>Tasks</h3>
-<ul>
-<%= render @client.tasks %>
-</ul>
-<%= link_to "Add or Edit a task", client_tasks_path(@client), :class => 'btn btn-info' %>
-
-<div class="form-actions">
-  <%= link_to 'Back', clients_path, :class => 'btn'  %>
-  <%= link_to 'Edit', edit_client_path(@client), :class => 'btn' %>
-  <%= link_to 'Delete', client_path(@client), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
-</div>
