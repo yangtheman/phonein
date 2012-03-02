@@ -8,7 +8,7 @@ class Client < ActiveRecord::Base
   end
       
   validates :phone, :uniqueness => true, 
-                    :length => { :is => 10, :message => "Need a correct US phone number" }
+                    :length => { :is => 10, :message => "needs to be a correct US phone number" }
                         
   def task_list
     tasks = self.tasks

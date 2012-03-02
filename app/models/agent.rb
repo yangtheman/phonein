@@ -2,7 +2,9 @@ class Agent < ActiveRecord::Base
   belongs_to :admin
   has_many :pairs
   
-  validates :code, :uniqueness => true
+  validates :code, :uniqueness => true,  
+                   :numericality => { :only_integer => true },
+                   :length => { :is => 6, :message => "must be six-digits." }  
   
   def check_in(cid)
     self.pairs.create(:client_id => cid, :state => "checked_in")
